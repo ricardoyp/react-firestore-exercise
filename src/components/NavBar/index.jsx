@@ -6,8 +6,8 @@ export const NavBar = () => {
     return (
         <>
         <Navbar isBordered variant="sticky">
-            <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                <NavbarItem>
+            <NavbarContent className="hidden sm:flex gap-10" justify="center">
+                <NavbarItem >
                     <Link color="foreground" href="/">
                         HomePage
                     </Link>
@@ -22,6 +22,11 @@ export const NavBar = () => {
                         Upload Song
                     </Link>
                 </NavbarItem>
+                <NavbarItem>
+                    <Link color="foreground" href="upload">
+                        Upload File
+                    </Link>
+                </NavbarItem> 
             </NavbarContent>
         </Navbar>
         <Outlet/>

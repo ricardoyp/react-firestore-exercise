@@ -3,6 +3,7 @@ import { Homepage } from "./components/HomePage"
 import { NavBar } from "./components/NavBar"
 import { Songs } from "./pages/Songs"
 import { CreateSong } from "./pages/CreateSong"
+import { Upload } from "./pages/Upload"
 
 export const App = () => {
 
@@ -12,6 +13,8 @@ export const App = () => {
         <Route path="/" element = {<Homepage />} />
         <Route path="/songs" element = {<Songs />} />
         <Route path="/create-song" element = {<CreateSong />} />
+        <Route path="/upload" element = {<Upload />} />
+
       </Route>
     </Routes>
   )
