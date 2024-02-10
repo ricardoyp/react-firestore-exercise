@@ -6,7 +6,7 @@ export const Songs = () => {
 
     const queryClient = useQueryClient();
     
-    const { mutate, ...rest } = useMutation({
+    const { mutate, isPending: isLoadingDelete } = useMutation({
         mutationKey: ['songs'],  
         mutationFn: (documentId) => deleteSong(documentId), // Envoltura para pasar documentId a deleteSong
         onSuccess: () => {
@@ -15,12 +15,14 @@ export const Songs = () => {
         }
     });
 
-    const { data: songs, isLoading } = useQuery({
+    const { data: songs, isLoading: isLoadingGet } = useQuery({
         queryKey: ['songs'],
         queryFn: getSongs
     });
 
-    if (isLoading) {
+    console.log("songs: ", songs);
+
+    if (isLoadingGet) {
         return <div>Loading...</div>
     }
 
@@ -47,6 +49,7 @@ export const Songs = () => {
                             </CardBody>
                         </Card>
                         <Button onClick={() => mutate(song.id)}>Delete</Button>
+                        {isLoadingDelete && <p>Deleting...</p>}
                     </div>
                 )
             })
