@@ -1,17 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSongs, deleteSong } from "../../API";
 import { Card, CardHeader, CardBody, Divider, Button } from "@nextui-org/react";
+import ReactAudioPlayer from 'react-audio-player';
+
 
 export const Songs = () => {
 
     const queryClient = useQueryClient();
-    
+
     const { mutate, isPending: isLoadingDelete } = useMutation({
-        mutationKey: ['songs'],  
+        mutationKey: ['songs'],
         mutationFn: (documentId) => deleteSong(documentId), // Envoltura para pasar documentId a deleteSong
         onSuccess: () => {
             // console.log("Deleted");
-            queryClient.invalidateQueries({queryKey: ['songs']}); // Invalida la cache de la query para que se vuelva a ejecutar la query y se muestre el nuevo dato en la lista de canciones
+            queryClient.invalidateQueries({ queryKey: ['songs'] }); // Invalida la cache de la query para que se vuelva a ejecutar la query y se muestre el nuevo dato en la lista de canciones
         }
     });
 
@@ -46,6 +48,10 @@ export const Songs = () => {
                             <Divider />
                             <CardBody>
                                 <p className="text-base">{song.genre}</p>
+                            </CardBody>
+                            <Divider />
+                            <CardBody className="items-center">
+                                <ReactAudioPlayer src={song.url} controls />
                             </CardBody>
                         </Card>
                         <Button onClick={() => mutate(song.id)}>Delete</Button>
